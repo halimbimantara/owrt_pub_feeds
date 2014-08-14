@@ -1,0 +1,8 @@
+menu "Configuration"
+    depends on PACKAGE_mosquitto
+
+config MOSQUITTO_LWS
+    bool "libwebsockets support"
+    default y
+
+endmenu

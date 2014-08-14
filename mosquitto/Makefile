@@ -9,20 +9,22 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=mosquitto
-PKG_VERSION:=1.3.4
+PKG_VERSION:=1.3.95
 PKG_RELEASE:=1
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-#PKG_REV:=4b30e412ab77
-#PKG_SOURCE:=$(PKG_REV).tar.bz2
-PKG_SOURCE_URL:=http://mosquitto.org/files/source/
-#PKG_SOURCE_URL:=https://bitbucket.org/oojah/mosquitto/get/
-#PKG_BUILD_DIR:=$(BUILD_DIR)/oojah-mosquitto-$(PKG_REV)
-PKG_MD5SUM:=9d729849efd74c6e3eee17a4a002e1e9
+PKG_REV:=294f67a8ef72
+#PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE:=$(PKG_REV).tar.bz2
+#PKG_SOURCE_URL:=http://mosquitto.org/files/source/
+PKG_SOURCE_URL:=https://bitbucket.org/oojah/mosquitto/get/
+PKG_BUILD_DIR:=$(BUILD_DIR)/oojah-mosquitto-$(PKG_REV)
+#PKG_MD5SUM:=9d729849efd74c6e3eee17a4a002e1e9
 
 include $(INCLUDE_DIR)/package.mk
 
 MAKE_FLAGS+=WITH_MEMORY_TRACKING=no
+MAKE_FLAGS+=WITH_WEBSOCKETS=$(if $(CONFIG_MOSQUITTO_LWS),"yes","no")
+
 include $(INCLUDE_DIR)/version.mk
 # The version of libopenssl in backfire doesn't support psk.
 ifeq ($(findstring 10.03,$(VERSION_CODE)),10.03)
@@ -41,8 +43,12 @@ endef
 define Package/$(PKG_NAME)
     $(call Package/mosquitto/default)
     TITLE+= (with SSL support)
-    DEPENDS+= +libopenssl
+    DEPENDS+= +libopenssl +MOSQUITTO_LWS:libwebsockets-openssl
     VARIANT:=ssl
+endef
+
+define Package/$(PKG_NAME)/config
+	source "$(SOURCE)/Config.in"
 endef
 
 define Package/$(PKG_NAME)-nossl
@@ -68,7 +74,6 @@ define Package/$(PKG_NAME)-nossl/description
         $(call Package/$(PKG_NAME)/default/description)
         This package is built WITHOUT SSL support.
 endef
-
 
 define Package/mosquitto-client/default
     $(Package/mosquitto/default)
