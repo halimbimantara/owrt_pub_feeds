@@ -41,7 +41,7 @@ define Package/$(PKG_NAME)/default
   CATEGORY:=Network
   TITLE:=mosquitto - an MQTT message broker
   URL:=http://www.mosquitto.org/
-  DEPENDS:= +librt
+  DEPENDS:= +librt +libuuid
 endef
 
 define Package/$(PKG_NAME)
