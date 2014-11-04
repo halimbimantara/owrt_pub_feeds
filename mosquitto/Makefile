@@ -9,10 +9,10 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=mosquitto
-PKG_VERSION:=1.3.95
+PKG_VERSION:=1.3.96
 PKG_RELEASE:=1
 
-PKG_REV:=294f67a8ef72
+PKG_REV:=908c5da1c88d
 #PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE:=$(PKG_REV).tar.bz2
 #PKG_SOURCE_URL:=http://mosquitto.org/files/source/
