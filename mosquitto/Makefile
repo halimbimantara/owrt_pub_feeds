@@ -9,20 +9,20 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=mosquitto
-PKG_VERSION:=1.3.96
+PKG_VERSION:=1.3.97
 PKG_RELEASE:=1
 
-PKG_REV:=908c5da1c88d
-#PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE:=$(PKG_REV).tar.bz2
-#PKG_SOURCE_URL:=http://mosquitto.org/files/source/
-PKG_SOURCE_URL:=https://bitbucket.org/oojah/mosquitto/get/
-PKG_BUILD_DIR:=$(BUILD_DIR)/oojah-mosquitto-$(PKG_REV)
+PKG_REV:=b52e3311d258dc105cb5c7ab692aa587fcd86ecc
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+PKG_SOURCE_URL:=http://git.eclipse.org/gitroot/mosquitto/org.eclipse.mosquitto.git
+PKG_SOURCE_PROTO:=git
+PKG_SOURCE_VERSION:=$(PKG_REV)
 #PKG_MD5SUM:=9d729849efd74c6e3eee17a4a002e1e9
 
 include $(INCLUDE_DIR)/package.mk
 
-MAKE_FLAGS+=WITH_MEMORY_TRACKING=no WITH_DOCS=no
+MAKE_FLAGS+=WITH_DOCS=no
 MAKE_FLAGS+=WITH_WEBSOCKETS=$(if $(CONFIG_MOSQUITTO_LWS),"yes","no")
 
 include $(INCLUDE_DIR)/version.mk
