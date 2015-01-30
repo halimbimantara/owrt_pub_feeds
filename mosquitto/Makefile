@@ -9,10 +9,10 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=mosquitto
-PKG_VERSION:=1.3.97
+PKG_VERSION:=1.3.98
 PKG_RELEASE:=1
 
-PKG_REV:=b52e3311d258dc105cb5c7ab692aa587fcd86ecc
+PKG_REV:=22e09ae6135a829215f1e4b3d59aa26127846ca1
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
 PKG_SOURCE_URL:=http://git.eclipse.org/gitroot/mosquitto/org.eclipse.mosquitto.git
